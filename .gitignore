@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.pem
+*.key
+*.env
+*.env.*
+配置链接*
+*private-settings*
+private/
+pack-profile/
+*.crx
+*.zip
+*.log
+codex-*.html
+codex-*.js

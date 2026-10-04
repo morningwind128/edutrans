@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <span id="app-name">EduTrans</span>
+    <a id="open-options" href="#">设置</a>
+  </header>
+  <div class="btns">
+    <button id="toggle" class="primary">翻译此页</button>
+  </div>
+  <div class="btns">
+    <button id="btn-summary" class="ghost">AI 摘要</button>
+    <button id="btn-yt" class="ghost hidden">翻译字幕</button>
+  </div>
+  <div class="row">
+    <label for="engine">翻译服务</label>
+    <select id="engine"></select>
+  </div>
+  <div class="row">
+    <label for="mode">显示模式</label>
+    <select id="mode">
+      <option value="bilingual">双语对照</option>
+      <option value="translation">仅译文</option>
+    </select>
+  </div>
+  <div class="row check">
+    <label><input type="checkbox" id="site-auto"> <span id="site-auto-label">本站自动翻译</span></label>
+  </div>
+  <footer>
+    <a id="link-vocab" href="#">生词本</a>
+    <span id="status"></span>
+  </footer>
+  <script src="../lib/common.js"></script>
+  <script src="../lib/i18n.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

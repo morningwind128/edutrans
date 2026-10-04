@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>EduTrans 学堂译 - 设置</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header>
+    <h1>EduTrans 学堂译</h1>
+    <span id="flash"></span>
+  </header>
+
+  <main>
+  <section id="sec-engines">
+    <h2>翻译服务</h2>
+    <p class="hint">
+      大模型翻译优先,点选设为默认;内置免费引擎无需账号;
+      自定义 AI 服务兼容 OpenAI 接口格式(智谱 GLM、DeepSeek、OpenRouter 等)。
+    </p>
+    <div id="engine-list"></div>
+    <button id="btn-add-engine">+ 添加自定义 AI 翻译服务</button>
+    <button id="btn-glm-preset">+ 一键添加智谱 GLM(免费模型)</button>
+    <div id="cfg-status" class="hint"></div>
+
+    <form id="engine-form" class="hidden">
+      <h3>自定义 AI 翻译服务</h3>
+      <div class="field">
+        <label for="ef-name">服务名称</label>
+        <input id="ef-name" type="text" placeholder="例如:GLM 免费模型">
+      </div>
+      <div class="field">
+        <label for="ef-baseurl">接口地址</label>
+        <input id="ef-baseurl" type="text" placeholder="https://open.bigmodel.cn/api/paas/v4">
+        <small>填 Base URL 或完整地址均可,自动补全 /chat/completions</small>
+      </div>
+      <div class="field">
+        <label for="ef-apikey">API Key</label>
+        <input id="ef-apikey" type="password" placeholder="只保存在本机">
+      </div>
+      <div class="field">
+        <label for="ef-morekeys">其他 API Key（每行一个，可选）</label>
+        <textarea id="ef-morekeys" rows="2" autocomplete="off" style="-webkit-text-security:disc" placeholder="只保存在本机；同一账户共享并发额度"></textarea>
+      </div>
+      <div class="field">
+        <label for="ef-account">所属账户（可选）</label>
+        <input id="ef-account" type="text" placeholder="同一账户的所有模型与 Key 填同一名称">
+        <small>留空时同一接口主机共用上限；多个 Key 不会自动增加并发。</small>
+      </div>
+      <div class="field">
+        <label for="ef-role">自动翻译分工</label>
+        <select id="ef-role">
+          <option value="off">仅作为默认或手动服务</option>
+          <option value="standard">常规正文</option>
+          <option value="complex">复杂正文与漏译补译</option>
+          <option value="all">两类正文均参与</option>
+        </select>
+        <small>启用分工后，与默认服务属于同一账户的模型才加入自动协作。</small>
+      </div>
+      <div class="field">
+        <label for="ef-model">模型名称</label>
+        <input id="ef-model" type="text" placeholder="例如:glm-4.5-flash(智谱免费)">
+      </div>
+      <div class="field">
+        <label for="ef-temp">Temperature</label>
+        <input id="ef-temp" type="number" step="0.1" value="0.1">
+      </div>
+      <div class="field">
+        <label for="ef-sysprompt">补充系统提示词(可选)</label>
+        <textarea id="ef-sysprompt" rows="3" placeholder="例如:读者是中学生,用语平实"></textarea>
+      </div>
+      <div class="btns">
+        <button type="button" id="ef-save" class="primary">保存</button>
+        <button type="button" id="ef-test">测试连接</button>
+        <button type="button" id="ef-cancel">取消</button>
+      </div>
+      <div id="ef-test-out"></div>
+    </form>
+  </section>
+
+  <section id="sec-pipeline">
+    <h2>翻译质量与速度</h2>
+    <div class="field">
+      <label class="inline"><input type="checkbox" id="opt-pipeline"> 本地与多模型协作</label>
+      <small>简单短文本优先本地；复杂正文使用指定模型；普通英文词漏译会单句重译。专有名称、缩写、网址和术语表保留形式除外。</small>
+    </div>
+    <div class="field">
+      <label for="opt-concurrency">同一账户最多同时请求数</label>
+      <input id="opt-concurrency" type="number" min="1" max="32" value="2">
+      <small>这是本机上限，不代表套餐保证值；所有标签、模型与 Key 共用上限，限流时会降低并发。</small>
+    </div>
+    <div class="field">
+      <label for="opt-local-threshold">简单文本本地优先长度</label>
+      <input id="opt-local-threshold" type="number" min="40" max="400" value="220">
+    </div>
+    <small class="autosave-hint">更改会自动保存。Coding Plan 使用你已获准的接入服务；普通 API 与套餐的计费通路分别配置。</small>
+  </section>
+
+  <section id="sec-basic">
+    <h2>基本设置</h2>
+    <div class="field">
+      <label for="opt-lang">目标语言</label>
+      <select id="opt-lang"></select>
+    </div>
+    <div class="field">
+      <label for="opt-mode">显示模式</label>
+      <select id="opt-mode">
+        <option value="bilingual">双语对照(原文 + 译文)</option>
+        <option value="translation">仅显示译文</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="opt-selection">划词翻译</label>
+      <label class="inline"><input type="checkbox" id="opt-selection"> 选中文字后出现"翻译"按钮</label>
+    </div>
+    <div class="field">
+      <label for="opt-hover">悬浮翻译</label>
+      <label class="inline"><input type="checkbox" id="opt-hover"> 按住 Ctrl(⌘)悬停段落即可翻译</label>
+    </div>
+    <div class="field">
+      <label for="opt-input">输入框翻译</label>
+      <label class="inline"><input type="checkbox" id="opt-input"> 输入框聚焦时出现"翻译"按钮,可一键还原</label>
+    </div>
+    <div class="field">
+      <label for="opt-blacklist">黑名单</label>
+      <textarea id="opt-blacklist" rows="3" placeholder="每行一个域名,例如:&#10;example.com"></textarea>
+      <small>这些站点不启用整页翻译(划词等其他功能仍可用)</small>
+    </div>
+    <small class="autosave-hint">更改会自动保存</small>
+  </section>
+
+  <section id="sec-filters">
+    <h2>广告与内容过滤</h2>
+    <p class="hint">
+      基于 ABP 规则语法的开源规则列表(EasyList China / EasyList /
+      StevenBlack hosts)本地转换为 Chrome 声明式拦截规则。
+      规则打包在扩展内,不联网更新、不上传任何数据。
+    </p>
+    <div class="field">
+      <label for="opt-ads">广告过滤</label>
+      <label class="inline"><input type="checkbox" id="opt-ads"> 屏蔽常见广告与跟踪请求</label>
+    </div>
+    <div class="field">
+      <label for="opt-adult">未成年人过滤</label>
+      <label class="inline"><input type="checkbox" id="opt-adult"> 屏蔽成人/赌博站点(默认开启,可关闭)</label>
+    </div>
+    <small class="autosave-hint">更改会自动保存</small>
+  </section>
+
+  <section id="sec-terms">
+    <h2>术语表</h2>
+    <p class="hint">
+      每行一条,格式:<code>原文 = 译文</code>。
+      AI 翻译服务会严格遵循术语表并保持整页一致;免费引擎会做整词替换。
+      适合老师统一教材术语、学生固定专业词汇。
+    </p>
+    <textarea id="terms-text" rows="6"
+      placeholder="例如:&#10;alliance = 联盟&#10;deterrence = 威慑"></textarea>
+    <small class="autosave-hint">更改会自动保存</small>
+  </section>
+
+  <section id="sec-vocab">
+    <h2>生词本</h2>
+    <p class="hint">划词翻译后点"收藏生词"即可存入,数据只保存在本机。</p>
+    <div class="btns">
+      <button id="vocab-export">导出 CSV</button>
+      <button id="vocab-clear" class="danger">清空</button>
+    </div>
+    <table id="vocab-table">
+      <thead>
+        <tr><th>原文</th><th>译文</th><th>出处</th><th>时间</th></tr>
+      </thead>
+      <tbody id="vocab-body"></tbody>
+    </table>
+  </section>
+
+  <section id="sec-privacy">
+    <h2>隐私说明</h2>
+    <p>
+      所有配置(包括 API Key)只保存在本机浏览器的本地存储中。
+      本扩展没有自有服务器、没有账号体系、不统计任何使用数据。
+    </p>
+    <p>
+      内置"设备端翻译"使用 Chrome 自带的本地翻译模型:首次使用某语言对时由
+      Chrome 下载语言包,之后翻译全部在本机完成,不发任何请求。
+      使用其他引擎时,待翻译文本发送给你选择的对应服务商;
+      页面内容不会被本扩展保存、分享或生成快照。
+    </p>
+  </section>
+  </main>
+
+  <script src="../lib/common.js"></script>
+  <script src="../lib/i18n.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

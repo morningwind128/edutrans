@@ -1,0 +1,106 @@
+body {
+  width: 320px;
+  margin: 0;
+  font: 14px/1.6 system-ui, sans-serif;
+  color: #111827;
+  background: #ffffff;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+}
+header span {
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+header a {
+  color: #dbeafe;
+  text-decoration: none;
+  font-size: 13px;
+}
+.btns {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px 0;
+}
+button {
+  flex: 1;
+  padding: 9px 0;
+  border: none;
+  border-radius: 9px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+button.primary {
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.35);
+}
+button.primary.off {
+  background: #9ca3af;
+}
+button.ghost {
+  background: #eef2ff;
+  color: #2563eb;
+  font-weight: 600;
+}
+button.ghost:hover {
+  background: #e0e7ff;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 0;
+}
+.row > label:first-child {
+  flex: 0 0 64px;
+  color: #6b7280;
+  font-size: 13px;
+}
+.row select {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+}
+.row.check {
+  padding: 10px 12px 4px;
+}
+.row.check label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #374151;
+  white-space: nowrap;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 12px;
+}
+footer a {
+  color: #2563eb;
+  text-decoration: none;
+}
+#status {
+  color: #dc2626;
+  text-align: right;
+  margin-left: 8px;
+}
+.hidden {
+  display: none;
+}

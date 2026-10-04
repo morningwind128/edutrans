@@ -1,0 +1,92 @@
+{
+  "manifest_version": 3,
+  "name": "EduTrans - Context-aware Bilingual Translator",
+  "version": "0.3.3",
+  "description": "School-first bilingual translator: on-device engine, context-aware AI, term base, dual YouTube captions, ABP-style ad & adult filtering, AI summary.",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/lib/common.js",
+        "src/lib/quality.js",
+        "src/lib/i18n.js",
+        "src/content/content.js"
+      ],
+      "css": [
+        "src/content/content.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "src/lib/common.js",
+        "src/lib/i18n.js",
+        "src/content/youtube.js"
+      ],
+      "css": [
+        "src/content/youtube.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ads",
+        "enabled": false,
+        "path": "filters/rules_ads.json"
+      },
+      {
+        "id": "adult",
+        "enabled": false,
+        "path": "filters/rules_adult.json"
+      }
+    ]
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "EduTrans"
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "toggle-translate": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "Toggle translation for current page"
+    },
+    "summarize-page": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "AI summary for current page"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvu6jLiIir3libHhkYAXI2ecI6b2tUbd0ZTlyRRWJq8kCwWgFMsvAxVr1uwsZwKbd4qj3FmVexTDMeVsoxreBebs2/zR+DFk8bUsFdgFBhz9m+ieCPHAbgLBe/LLBD66sma26Hy1DzC8RbAILYi1A8BodX62N9DERj1ABVoprXtBxRWkBsWuH0+ZZj85DQb71oEi8W5X5foyCK7wO3bh54lqwGBt2mCP9Pb9fUQCxIG5qfAqJvtzP237Gp2mH7nPngGK7UGkXW4ZpXgUyregn1bDdJ22tuSWhr4zxjcenkOzq2B9CngBpyLvfrvWA4mlLnalbQ5+uMjFS+zj4G9uMQQIDAQAB"
+}

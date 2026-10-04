@@ -1,0 +1,92 @@
+/* EduTrans YouTube overlay */
+.edutrans-yt {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 72px;
+  z-index: 60;
+  text-align: center;
+  pointer-events: none;
+  max-width: 80%;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font: 15px/1.5 system-ui, sans-serif;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+.edutrans-yt-src {
+  opacity: 0.85;
+  font-size: 13px;
+}
+.edutrans-yt-out {
+  color: #93c5fd;
+  font-weight: 600;
+}
+.edutrans-inputbtn {
+  position: fixed;
+  z-index: 2147483647;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.edutrans-pill {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 64px;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #111827;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font: 13px/1.5 system-ui, sans-serif;
+  max-width: 60vw;
+}
+.edutrans-pill-msg {
+  word-break: break-all;
+}
+.edutrans-summary {
+  position: fixed;
+  top: 76px;
+  right: 20px;
+  z-index: 2147483647;
+  width: 380px;
+  max-height: 70vh;
+  overflow: auto;
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  padding: 14px 16px;
+  font: 14px/1.7 system-ui, sans-serif;
+}
+.edutrans-sum-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.edutrans-sum-body {
+  white-space: pre-wrap;
+  color: #1f2937;
+}
+@media (prefers-color-scheme: dark) {
+  .edutrans-summary {
+    background: #1f2937;
+    color: #f3f4f6;
+    border-color: #374151;
+  }
+  .edutrans-sum-body {
+    color: #e5e7eb;
+  }
+}

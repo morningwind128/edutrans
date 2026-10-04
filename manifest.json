@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "EduTrans - Context-aware Bilingual Translator",
   "version": "0.3.3",
-  "description": "School-first bilingual translator: on-device engine, context-aware AI, term base, dual YouTube captions, ABP-style ad & adult filtering, AI summary.",
+  "description": "Bilingual web translator with on-device translation, multi-model AI routing, a term glossary and completeness checks.",
   "permissions": [
     "storage",
     "contextMenus",

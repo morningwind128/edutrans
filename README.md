@@ -150,3 +150,5 @@ node tests/content.load.js
 CRX 是签名分发包；普通 Chrome 在 Windows/macOS 上可能限制商店外 CRX 安装。没有企业策略或商店安装通路时，请下载 ZIP 并解压，在 `chrome://extensions` 开启“开发者模式”，选择“加载已解压的扩展程序”并选中含 `manifest.json` 的目录。不要修改 Chrome 安全策略。
 
 首次安装默认使用设备端翻译。需要云端翻译时，在设置页填写自己的接口和令牌；令牌仅保存在本机。
+
+Chrome 网上应用店上传请使用 `edutrans-0.3.3-webstore.zip`（manifest 位于 ZIP 根目录），并填写开发者后台的隐私/权限用途声明；GitHub 发布不等于已经通过应用店审核。
